@@ -1,0 +1,46 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+      {
+        "name": "client",
+        "image": "621733431345.dkr.ecr.us-east-1.amazonaws.com/node-nginx:latest",
+        "hostname": "client",
+        "essential": true,
+        "memory": 1024,
+        "portMappings": [
+          {
+            "hostPort": 4200,
+            "containerPort": 4200
+          }
+        ]
+      },
+      {
+        "name": "server",
+        "image": "621733431345.dkr.ecr.us-east-1.amazonaws.com/node:latest",
+        "hostname": "server",
+        "essential": true,
+        "links": ["mongo"],
+        "memory": 512,
+        "portMappings": [
+          {
+            "hostPort": 3000,
+            "containerPort": 3000
+          }
+        ]
+      },
+      {
+        "name": "mongo",
+        "image": "621733431345.dkr.ecr.us-east-1.amazonaws.com/mongo:latest",
+        "hostname": "mongo",
+        "essential": true,
+        "portMappings": [ 
+          {
+            "hostPort": 27017,
+            "containerPort": 27017
+          }
+        ],
+        
+        "memory": 512
+      }
+    ]
+  }
