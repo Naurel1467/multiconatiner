@@ -1,0 +1,112 @@
+<!-- <div class="loader" >
+    <mat-spinner></mat-spinner>
+</div> -->
+<mat-dialog-content>
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 mat-dialog-title>Products</h2>
+                    <h5 class="subtitle">Select all which you want to buy</h5>
+                    <form [formGroup]="firstFormGroup">
+                        <ul>
+                            <li *ngFor="let data of Products; let i=index">
+                                <mat-checkbox class="example-margin" [value]="data.value" (change)="onProductCheckboxChange($event)">{{data.name}}</mat-checkbox>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <h2 mat-dialog-title>Interaction</h2>
+                    <h5 class="subtitle">Select How you want to use these products</h5>
+                    <form [formGroup]="firstFormGroup">
+                        <ul>
+                            <li *ngFor="let data of Interaction; let i=index">
+                                <mat-checkbox class="example-margin" [value]="data.value" (change)="onInteractionsCheckboxChange($event)">{{data.name}}</mat-checkbox>
+                            </li>
+                        </ul>
+                    </form>
+                    
+                </div>
+            </div>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 mat-dialog-title>For a more personalized experience</h2>
+                    <h5 class="subtitle">Select all options which are correct<br>Ignore other options</h5>
+                    <form [formGroup]="firstFormGroup">
+                        <ul>
+                            <li *ngFor="let data of personalizedOptions; let i=index">
+                                <mat-checkbox class="example-margin" [value]="data.value" (change)="onpersonalizedOptionsCheckboxChange($event)">{{data.name}}</mat-checkbox>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <form class="example-form" [formGroup]="firstFormGroup">
+                        <mat-form-field class="example-full-width">
+                          <mat-label>Your Age*</mat-label>
+                          <input formControlName="age" matInput placeholder="Ex. 25">
+                          <mat-error *ngIf="errorHandling('age', 'required')">
+                            You must provide a <strong>age</strong>
+                          </mat-error>
+                        </mat-form-field>
+                        <div class="Gender d-flex align-items-center">
+                            <div><mat-label>Gender*</mat-label></div>
+                            <div>
+                                <mat-radio-group aria-label="Select an option" formControlName="gender">
+                                   <mat-radio-button value="male">Male</mat-radio-button>
+                                   <mat-radio-button value="female">Female</mat-radio-button>
+                                </mat-radio-group>
+                                <mat-error *ngIf="firstFormGroup.controls.gender.errors?.required && (firstFormGroup.controls.gender.dirty || firstFormGroup.controls.gender.touched)">
+                                    You must provide <strong>gender</strong>
+                                </mat-error>
+                            </div>
+                        </div>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>City*</mat-label>
+                            <input formControlName="city" matInput placeholder="Ex. Mumbai">
+                            <mat-error *ngIf="errorHandling('city', 'required')">
+                                You must provide a <strong>city</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Profession*</mat-label>
+                            <input formControlName="profession" matInput placeholder="Ex. Developer">
+                            <mat-error *ngIf="errorHandling('profession', 'required')">
+                                You must provide <strong>profession</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Name</mat-label>
+                            <input formControlName="name" matInput placeholder="Ex. XYZ">
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Email*</mat-label>
+                            <input formControlName="email" matInput placeholder="Ex. XYZ@gmail.com">
+                            <mat-error *ngIf="errorHandling('email', 'required')">
+                                You must provide <strong>email</strong>
+                            </mat-error>
+                            <mat-error *ngIf="errorHandling('email', 'email')">
+                                You must provide <strong>valid email</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Phone number</mat-label>
+                            <input maxlength="10" (keypress)=_keyPress($event) formControlName="number" matInput placeholder="Ex. XXXXXXXXXX">
+                            <mat-error *ngIf="errorHandling('number', 'pattern')">
+                                It is not a valid mobile number.
+                            </mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button *ngIf="stepper.selectedIndex == 0" class="mat-raised-button text-primary" (click)="goForward(stepper)">Personalized experience</button>
+    <button *ngIf="stepper.selectedIndex == 1" [disabled]="firstFormGroup.invalid || formsubmit" class="mat-raised-button text-primary form-submt" (click)="save()"><span class="mat-spin" *ngIf="formsubmit"><mat-spinner diameter="20"></mat-spinner></span><span>Let's start</span></button>
+</mat-dialog-actions>

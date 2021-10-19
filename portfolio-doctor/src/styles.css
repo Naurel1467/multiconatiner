@@ -1,0 +1,110 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+font-face {
+	font-family: "Roboto-bold";
+	src: local("Roboto"), url(./assets/fonts/Roboto/Roboto-Bold.ttf) format("truetype");
+}
+
+font-face {
+	font-family: "Roboto-light";
+	src: local("Roboto"), url(./assets/fonts/Roboto/Roboto-Light.ttf) format("truetype");
+}
+
+font-face {
+	font-family: "Roboto-medium";
+	src: local("Roboto"), url(./assets/fonts/Roboto/Roboto-Medium.ttf) format("truetype");
+}
+
+font-face {
+	font-family: "Roboto-regular";
+	src: local("Roboto"), url(./assets/fonts/Roboto/Roboto-Regular.ttf) format("truetype");
+}
+
+body {
+	background-color: #dbe6f585;
+	font-family: "Roboto-regular", sans-serif;
+}
+
+.container {
+	padding: 0 120px;
+}
+
+.main-content p {
+	font-family: "Roboto-regular", sans-serif;
+	font-size: 22px;
+	font-weight: 400;
+	text-align: justify;
+	line-height: 2.3rem;
+}
+
+.header {
+	padding: 75px 0 50px 0;
+}
+
+.main-content {
+	padding-bottom: 50px;
+}
+
+.header h1 {
+	letter-spacing: 1.5px;
+	font-family: 'Acme', sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 3.4rem;
+	color: #0062a8;
+}
+
+.header h5 {
+	font-family: 'Roboto-bold', sans-serif;
+	font-weight: 700;
+	color: #26bdaf;
+	letter-spacing: 0.8px;
+	font-size: 20px;
+}
+
+.footer button.mat-focus-indicator.mat-raised-button.mat-button-base.mat-primary:hover {
+	box-shadow: none;
+}
+
+.footer .mat-raised-button {
+	padding: 7px 30px;
+	font-size: 18px;
+	font-family: "Roboto-regular", sans-serif
+}
+.mat-stepper-horizontal-line{display: none;}
+.mat-horizontal-stepper-header-container {padding: 0 40%}
+form ul li{list-style:none;}
+form ul{padding-left: 0;}
+.subtitle{color:slategray;font-size: 14px!important;}
+.mat-typography h2{margin-bottom: 0;}
+.mat-dialog-actions{float: right;}
+.mat-form-field{display: block!important;}
+.mat-checkbox-layout{white-space: break-spaces!important;}
+.mat-checkbox-layout{display: block!important;}
+.mat-radio-button{margin: 0 0 0 12px;}
+.mat-step-header .mat-step-icon-state-edit {background-color: gray;}
+.success-msg{font-family: "Roboto-regular", sans-serif;color: #26bdaf;font-weight: 600!important;font-size: 30px!important;text-align: center!important;letter-spacing: 1px;padding-top: 50px;}
+button.mat-raised-button.text-primary.ng-star-inserted:hover {box-shadow: none;border: 1px solid;}
+.mat-dialog-actions button:disabled {cursor: no-drop;background-color: lightgray;}
+.Gender{padding: .4375em 0;padding-bottom: 12px;}
+.loader{background-color: #3a3737ab;width: 100vw;height: 100vh;position: absolute;top: 0;left: 0;z-index: 99;}
+.loader mat-spinner {text-align: center;left: 50%;top: 40%;}
+.form-submit{display: flex;align-items: center;position: relative;}
+.mat-spin{background-color: #d3d3d3ba;width: 100%;position: absolute;height: 100%;left: 0;top: 0;}
+.mat-spin mat-spinner{width: 20px;height: 20px;left: 35%;top: 20%;}
+
+/* #########respoonsive css############ */
+@media (max-width: 767px){
+	.container {padding: 0 15px;}
+	.main-content p{text-align: left;}
+	.header h1{font-size: 2.5rem;}
+	.main-content p {font-size: 18px!important;}
+	.mat-horizontal-stepper-header-container {padding: 0 20%;}
+	.mat-dialog-actions{float: none;}
+	.mat-dialog-actions button{margin: 0 auto;}
+	.mat-radio-button {margin: 5px 0 0 12px;}
+	.mat-typography h2 {margin-bottom: 8px;line-height: 25px;}
+	.success-msg{line-height: 1.5rem!important;}
+	.footer{padding-bottom: 50px;}
+}
