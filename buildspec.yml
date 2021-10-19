@@ -1,34 +1,22 @@
 version: 0.2
 phases:
+  install:
+    runtime-versions:
+      docker: 18
   pre_build:
-      commands:
-        - echo logginf into Amazon ECR...
-        - aws --version
-        - echo $AWS_DEFAULT_REGION
-        #- $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-        - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 551450855787.dkr.ecr.ap-south-1.amazonaws.com
-        - REPOSITORY_URI_node=551450855787.dkr.ecr.ap-south-1.amazonaws.com/node
-        - REPOSITORY_URI_mongo=551450855787.dkr.ecr.ap-south-1.amazonaws.com/mongo
-        - REPOSITORY_URI_node_nginx=551450855787.dkr.ecr.ap-south-1.amazonaws.com/node-nginx
-        - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-        - IMAGE_TAG=${COMMIT_HASH:=latest}
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 621733431345.dkr.ecr.us-east-1.amazonaws.com
   build:
-      commands:
-        - echo build started on 'date'
-        - echo Building the Docker image for node
-        - docker build -t $REPOSITORY_URI_node:latest ./backend/
-        - docker tag $REPOSITORY_URI_node:latest $REPOSITORY_URI_node:$IMAGE_TAG  
-        - echo Building the Docker image for node-nginx
-        - docker build -t $REPOSITORY_URI_node_nginx:latest ./portfolio-doctor/
-        - docker tag $REPOSITORY_URI_node_nginx:latest $REPOSITORY_URI_node_nginx:$IMAGE_TAG 
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker-compose build
   post_build:
-      commands:
-        - echo Build completed on 'date' 
-        - docker push $REPOSITORY_URI_node:latest
-        - docker push  $REPOSITORY_URI_node:$IMAGE_TAG
-        - docker push $REPOSITORY_URI_node_nginx:latest
-        - docker push $REPOSITORY_URI_node_nginx:$IMAGE_TAG
-        - printf '[{"name":"node-backend","imageUri":"%s"},{"name":"node-nginx-frontend","imageUri":"%s"}]' $REPOSITORY_URI_node:$IMAGE_TAG $REPOSITORY_URI_node_nginx:$IMAGE_TAG > imagedefinitions.json
-        - cat imagedefinitions.json
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker-compose push
 artifacts:
-      files: imagedefinitions.json
+  files:
+    - 'Dockerrun.aws.json'
