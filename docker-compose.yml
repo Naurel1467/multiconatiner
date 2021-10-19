@@ -2,7 +2,7 @@ version: '3.7'
 services:
   mongodb:
     container_name: mongoDB
-    image: 551450855787.dkr.ecr.ap-south-1.amazonaws.com/mongo:latest
+    image: mongo:latest
     restart: always
     # environment:
     #   - MONGO_INITDB_ROOT_USERNAME=root
