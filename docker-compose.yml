@@ -56,6 +56,6 @@ services:
       context: ./portfolio-doctor
     container_name: frontend-angular
     ports:
-      - '4200:4200'
+      - '4200:80'
     depends_on:
       - mongodb
