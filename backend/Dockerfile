@@ -1,4 +1,4 @@
-FROM  node:14.16.0-alpine  as build-step
+FROM 621733431345.dkr.ecr.us-east-1.amazonaws.com/nodeog:latest  as build-step
 WORKDIR /app
 COPY ./package.json /app
 RUN npm install

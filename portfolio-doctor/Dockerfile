@@ -1,4 +1,4 @@
-FROM  node:14.16.0-alpine as build-step
+FROM  621733431345.dkr.ecr.us-east-1.amazonaws.com/nodeog:latest as build-step
 WORKDIR /app
 COPY package.json /app
 RUN npm install
@@ -6,7 +6,7 @@ COPY . /app
 RUN npm run build
 
 # Step 2
-FROM nginx:1.21.3-alpine
+FROM 621733431345.dkr.ecr.us-east-1.amazonaws.com/nginxog:latest
 COPY --from=build-step app/dist/portfolio-doctor /usr/share/nginx/html
 EXPOSE 4200
 
